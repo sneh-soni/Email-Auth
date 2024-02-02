@@ -10,11 +10,10 @@ export default async function connect() {
     });
 
     connection.on("error", (err) => {
-      console.log("MongoDB Connection Error" + err);
+      console.log("MongoDB Connection Error: " + err);
       process.exit();
     });
   } catch (error) {
-    console.log("Something Went Wrong");
-    console.log(error);
+    console.log("Something Went Wrong with DB: ", error);
   }
 }

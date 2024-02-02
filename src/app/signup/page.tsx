@@ -3,17 +3,20 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Axios } from "axios";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 export default function SignUpPage() {
+  //router to go to /login
   const router = useRouter();
 
-  const [user, setUser] = React.useState({
+  const [user, setUser] = useState({
     username: "",
     email: "",
     password: "",
   });
 
+  //button to be disabled while incomplete fields
   const [buttonDisable, setButtonDisable] = useState(true);
   useEffect(() => {
     if (
@@ -26,15 +29,21 @@ export default function SignUpPage() {
       setButtonDisable(true);
     }
   }, [user]);
-
+  //Show Please wait..
   const [loading, setLoading] = useState(false);
 
   const onSignup = async () => {
     try {
       setLoading(true);
-      const response = await Axios.post("/api/signup", user);
+      //sending "user" to "/api/signup"
+      const response = await axios.post("/api/signup", user);
+      console.log("Signup success: ", response);
+      toast.success("Signup success");
+      //pushing user to "/login"
+      router.push("/login");
     } catch (error: any) {
-      console.log("Signup Failed", error.message);
+      console.log("Signup Failed: ", error.message);
+      toast.error("Signup Failed");
     } finally {
       setLoading(false);
     }
@@ -43,7 +52,7 @@ export default function SignUpPage() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
       <h1 className="text-xl font-bold my-2">
-        {!loading ? "SignUp" : "Please wait"}
+        {!loading ? "SignUp" : "Please wait.."}
       </h1>
       <hr />
 
