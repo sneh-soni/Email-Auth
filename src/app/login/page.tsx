@@ -27,16 +27,15 @@ export default function SignUpPage() {
 
   const onLogin = async () => {
     try {
+      if (buttonDisable) return;
       setLoading(true);
       //sending "user" to "/api/login"
       const response = await axios.post("/api/login", user);
-      console.log("Login Success: ", response);
       toast.success("Login Successfully");
       //pushing user to "/profile"
       router.push("/profile");
     } catch (error: any) {
-      console.log("Login Failed: ", error);
-      toast.error(error.message);
+      toast.error("Login Failed");
     } finally {
       setLoading(false);
     }
