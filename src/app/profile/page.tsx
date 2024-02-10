@@ -3,15 +3,13 @@
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-import Link from "next/link";
 
 export default function ProfilePage() {
   const router = useRouter();
-  // const [id, setId] = useState("");
 
   const logout = async () => {
     try {
+      // Get request to logout
       const response = await axios.get("/api/logout");
       toast.success("Logout successfull");
       router.push("/login");
@@ -22,9 +20,9 @@ export default function ProfilePage() {
 
   const getUserDetails = async () => {
     try {
+      // Get request to userdetails
       const response = await axios.get("/api/userdetails");
       router.push(`/profile/${response.data.user._id}`);
-      // setId(response.data.user._id);
     } catch (error: any) {
       toast.error("Failed to get user details");
     }
@@ -49,7 +47,6 @@ export default function ProfilePage() {
           Get User Details
         </button>
       </div>
-      {/* {id == "" ? <></> : <Link href={`/profile/${id}`}></Link>} */}
     </div>
   );
 }
