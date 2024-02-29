@@ -4,7 +4,7 @@ import axios from "axios";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 
-export default function verifyEmail() {
+export default function VerifyEmail() {
   const [token, setToken] = useState("");
   const [verified, setVerified] = useState(false);
   const [error, setError] = useState(false);
