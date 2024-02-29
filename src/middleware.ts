@@ -13,8 +13,7 @@ export function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
 
   //Public path ? true : false
-  const isPublic =
-    path == "/login" || path == "/signup" || path == "/verifyemail";
+  const isPublic = path == "/login" || path == "/signup";
 
   //Get token from user cookies
   const token = request.cookies.get("token")?.value || "";
