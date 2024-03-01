@@ -30,6 +30,9 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
       },
     });
 
+    // Encode the hashedToken for URL
+    const encodedToken = encodeURIComponent(hashedToken);
+
     //Create mail Options
     var mailOptions = {
       from: "ssneh20062003@gmail.com",
@@ -41,7 +44,7 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
         <p>Please click on the following link to ${
           emailType === "VERIFY" ? "Verify your email" : "Reset your Password"
         }</p>
-        <a href="${process.env.DOMAIN}/verifyemail?token=${hashedToken}">${
+        <a href="${process.env.DOMAIN}/verifyemail?token=${encodedToken}">${
         emailType === "VERIFY" ? "Verify your email" : "Reset your Password"
       }</a>
       `,

@@ -8,7 +8,8 @@ export async function POST(request: NextRequest) {
   try {
     //Get data from request
     const reqBody = await request.json();
-    const { token } = reqBody;
+    const { encodedToken } = reqBody;
+    const token = decodeURIComponent(encodedToken);
 
     //Get the user
     const user = await User.findOne({
